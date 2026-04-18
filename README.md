@@ -4,6 +4,8 @@ Users rate their experience (1–5), leave an optional comment, and see a live s
 
 The frontend support **fully standalone** (pure React state, no backend required). Alternate with the NestJS + MongoDB backend by fill the "NEXT_PUBLIC_API_URL" environment variable frontend.
 
+
+Live Deployment: [http://sentiment-alb-930936963.ap-southeast-1.elb.amazonaws.com:8080](http://sentiment-alb-930936963.ap-southeast-1.elb.amazonaws.com:8080)
 ---
 
 ## Prerequisites
