@@ -26,15 +26,10 @@ describe('AppController (e2e)', () => {
   });
 
   it('/health (GET)', () => {
-    return request(app.getHttpServer())
-      .get('/health')
-      .expect(200)
-      .expect('ok');
+    return request(app.getHttpServer()).get('/health').expect(200).expect('ok');
   });
 
   it('/feedback (DELETE) should return 204', () => {
-    return request(app.getHttpServer())
-      .delete('/feedback')
-      .expect(204);
+    return request(app.getHttpServer()).delete('/feedback').expect(204);
   });
 });

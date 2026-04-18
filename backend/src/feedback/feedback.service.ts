@@ -1,13 +1,13 @@
-import { Injectable } from '@nestjs/common'
-import { InjectModel } from '@nestjs/mongoose'
-import { Model } from 'mongoose'
-import { Feedback, FeedbackDocument } from './feedback.schema'
-import { FeedbackCreateDto, FeebackResponseDto } from './dto/feedback.dto'
+import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { Feedback, FeedbackDocument } from '../schemas/feedback.schema';
+import { FeedbackCreateDto, FeebackResponseDto } from './dto/feedback.dto';
 
 interface AggregationResult {
-  total: number
-  average: number | null
-  recentComments: Array<{ comment: string }>
+  total: number;
+  average: number | null;
+  recentComments: Array<{ comment: string }>;
 }
 
 @Injectable()
@@ -21,8 +21,8 @@ export class FeedbackService {
     const doc = new this.feedbackModel({
       rating: dto.rating,
       comment: dto.comment ?? '',
-    })
-    return doc.save()
+    });
+    return doc.save();
   }
 
   async getSummary(): Promise<FeebackResponseDto> {
@@ -52,23 +52,20 @@ export class FeedbackService {
           recentComments: '$recent',
         },
       },
-    ])
+    ]);
 
-    const total = result?.total ?? 0
-    const rawAverage = result?.average ?? null
-    const average =
-      rawAverage !== null
-        ? Math.round(rawAverage * 10) / 10
-        : 0
+    const total = result?.total ?? 0;
+    const rawAverage = result?.average ?? null;
+    const average = rawAverage !== null ? Math.round(rawAverage * 10) / 10 : 0;
 
     const recentComments = (result?.recentComments ?? [])
       .map((r) => r.comment)
-      .filter(Boolean)
+      .filter(Boolean);
 
-    return { total, average, recentComments }
+    return { total, average, recentComments };
   }
 
   async resetAll(): Promise<void> {
-    await this.feedbackModel.deleteMany({})
+    await this.feedbackModel.deleteMany({});
   }
 }

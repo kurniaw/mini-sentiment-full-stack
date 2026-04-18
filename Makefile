@@ -42,13 +42,13 @@ build: build-backend build-frontend ## Build both services
 ##@ Test
 
 test-backend: ## Run backend unit tests
-	cd backend && npm test
+	cd backend && npm test && npm run lint && npm run test:e2e
 
 test-backend-e2e: ## Run backend e2e tests
 	cd backend && npm run test:e2e
 
 test-frontend: ## Run frontend tests
-	cd frontend && npm test
+	cd frontend && npm test && npm run lint
 
 test: test-backend test-frontend ## Run all unit tests
 
